@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Tasks</h2>
+<a href="{% url 'task-list' %}">All</a> |
+<a href="?status=pending">Pending</a> |
+<a href="?status=completed">Completed</a>
+<div class="list-group mt-3">
+  {% for task in tasks %}
+    <div class="list-group-item d-flex justify-content-between">
+      <a href="{% url 'task-detail' task.pk %}">{{ task.title }} ({{ task.get_priority_display }})</a>
+      <span>
+        <a href="{% url 'task-update' task.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+        <a href="{% url 'task-delete' task.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+      </span>
+    </div>
+  {% empty %}<p>No tasks yet.</p>{% endfor %}
+</div>
+{% endblock %}
