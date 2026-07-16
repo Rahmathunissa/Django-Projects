@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back</a>
+<div class="row">
+    <div class="col-md-5">
+        {% if product.image_url %}
+            <img src="{{ product.image_url }}" class="img-fluid rounded" alt="{{ product.name }}">
+        {% endif %}
+    </div>
+    <div class="col-md-7">
+        <h2>{{ product.name }}</h2>
+        <p>${{ product.price }}</p>
+        <p>{{ product.description }}</p>
+        <form method="post" action="{% url 'cart-add' product.id %}">
+            {% csrf_token %}
+            <input type="number" name="quantity" value="1" min="1">
+            <button class="btn btn-primary">Add to cart</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

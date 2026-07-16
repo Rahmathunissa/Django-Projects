@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Order #{{ order.pk }}</h2>
+<table class="table bg-white">
+  {% for item in order.items.all %}
+  <tr><td>{{ item.product.name }}</td><td>{{ item.quantity }}</td><td>${{ item.subtotal }}</td></tr>
+  {% endfor %}
+</table>
+<p>Total: ${{ order.total }}</p>
+{% endblock %}
